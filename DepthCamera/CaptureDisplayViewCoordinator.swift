@@ -74,13 +74,6 @@ extension CaptureDisplayViewCoordinator: ARSessionDelegate {
             return
         }
         
-        // Write the capture if calibrating or collecting data.
-        if globals.captureState == .calibrating || globals.captureState == .collectingData {
-            latestFrameID += 1
-            writer.saveTimestamp(frame.timestamp)
-            writer.write(frameID: latestFrameID, rgbPixelBuffer: videoPixelBuffer, depthPixelBuffer: depthPixelBuffer, cameraIntrinsic: cameraIntrinsics)
-        }
-        
         // Display the capture.
         switch globals.displayMode {
         case .displayRGB:
@@ -94,6 +87,13 @@ extension CaptureDisplayViewCoordinator: ARSessionDelegate {
             globals.renderer.textures[.depthConfidence] = nil
             globals.renderer.textures[.depth] = createMTLTexture(from: depthPixelBuffer, textureCache: textureCache, pixelFormat: .r32Float)
             globals.renderer.textures[.depthConfidence] = createMTLTexture(from: depthConfidencePixelBuffer, textureCache: textureCache, pixelFormat: .r8Uint)
+        }
+        
+        // Write the capture if calibrating or collecting data.
+        if globals.captureState == .calibrating || globals.captureState == .collectingData {
+            latestFrameID += 1
+            writer.saveTimestamp(frame.timestamp)
+            writer.write(frameID: latestFrameID, rgbPixelBuffer: videoPixelBuffer, depthPixelBuffer: depthPixelBuffer, depthConfidencePixelBuffer: depthConfidencePixelBuffer, cameraIntrinsic: cameraIntrinsics)
         }
     }
     

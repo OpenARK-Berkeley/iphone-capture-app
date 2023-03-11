@@ -19,7 +19,7 @@ class CaptureDataWriter {
     var firstTimestamp: Double = -1
     var serializedTimestamps : String = ""
     
-    let ioQueue = DispatchQueue(label: "I/O Queue", qos: .background)
+    let ioQueue = DispatchQueue(label: "I/O Queue", qos: .default, attributes: .concurrent)
     
     /// Prepare for a new around of capture cycle.
     func prepareForNewCaptureCycle() {
@@ -29,15 +29,19 @@ class CaptureDataWriter {
     }
     
     /// Write data to local files. This function is very slow and should be executed in a background thread.
-    func write(frameID: Int, rgbPixelBuffer: CVPixelBuffer, depthPixelBuffer : CVPixelBuffer, cameraIntrinsic: simd_float3x3) {
+    func write(frameID: Int, rgbPixelBuffer: CVPixelBuffer, depthPixelBuffer : CVPixelBuffer, depthConfidencePixelBuffer: CVPixelBuffer? = nil, cameraIntrinsic: simd_float3x3) {
         let rgbURL = saveDirectory.appendingPathComponent(String(frameID) + ".jpeg")
         let depthURL = saveDirectory.appendingPathComponent(String(frameID) + ".bin")
+        let confidenceULR = saveDirectory.appendingPathComponent(String(frameID) + "_confidence.bin")
         let calibURL = saveDirectory.appendingPathComponent(String(frameID) + "_calibration.txt")
         
         ioQueue.async { [weak self] in
             self?.writeRGBData(rgbPixelBuffer, to: rgbURL)
             self?.writeDepthData(depthPixelBuffer, to: depthURL)
             self?.writeCameraCalibData(cameraIntrinsic: cameraIntrinsic, to: calibURL)
+            if let depthConfidencePixelBuffer = depthConfidencePixelBuffer {
+                self?.writeDepthConfidenceData(depthConfidencePixelBuffer, to: confidenceULR)
+            }
         }
     }
     
@@ -135,6 +139,22 @@ extension CaptureDataWriter {
         let depthData = Data(bytes: baseAddress!, count: yLength)
         do {
             try depthData.write(to: url)
+        } catch {
+            print("Unable to write depth data: \(error)")
+        }
+    }
+    
+    private func writeDepthConfidenceData(_ depthConfidencePixelBuffer: CVPixelBuffer, to url: URL) {
+        CVPixelBufferLockBaseAddress(depthConfidencePixelBuffer, CVPixelBufferLockFlags(rawValue: 0))
+        let height = CVPixelBufferGetHeight(depthConfidencePixelBuffer)
+        let baseAddress = CVPixelBufferGetBaseAddress(depthConfidencePixelBuffer)
+        let bytesPerRow = CVPixelBufferGetBytesPerRow(depthConfidencePixelBuffer)
+        CVPixelBufferUnlockBaseAddress(depthConfidencePixelBuffer, CVPixelBufferLockFlags(rawValue: 0))
+        let yLength = bytesPerRow *  height
+        
+        let confidenceData = Data(bytes: baseAddress!, count: yLength)
+        do {
+            try confidenceData.write(to: url)
         } catch {
             print("Unable to write depth data: \(error)")
         }

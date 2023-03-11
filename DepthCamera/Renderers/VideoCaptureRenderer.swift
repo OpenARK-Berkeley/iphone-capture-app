@@ -8,7 +8,6 @@
 import MetalKit
 
 class VideoCaptureRenderer: NSObject {
-    
     var globals = GlobalVariables.instance
     var textures: [TextureType : MTLTexture?] = [:]
     

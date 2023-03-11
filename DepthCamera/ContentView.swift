@@ -40,8 +40,6 @@ struct ContentView: View {
                 // Capture State indicator
                 Button(globals.captureState.getDescription(), role: .none) { }
                     .buttonStyle(.borderedProminent).tint(globals.captureState.getGuidanceColor())
-                    
-
             }
             
             // Capture instruction.
