@@ -24,7 +24,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		E916CA9B29B020F1002A8545 /* DepthCamera.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DepthCamera.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		E916CA9B29B020F1002A8545 /* DTTD Capture.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "DTTD Capture.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		E916CA9E29B020F1002A8545 /* DepthCameraApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DepthCameraApp.swift; sourceTree = "<group>"; };
 		E916CAA029B020F1002A8545 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		E916CAA229B020F2002A8545 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -64,7 +64,7 @@
 		E916CA9C29B020F1002A8545 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				E916CA9B29B020F1002A8545 /* DepthCamera.app */,
+				E916CA9B29B020F1002A8545 /* DTTD Capture.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -110,9 +110,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		E916CA9A29B020F1002A8545 /* DepthCamera */ = {
+		E916CA9A29B020F1002A8545 /* DTTD Capture */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = E916CAA929B020F2002A8545 /* Build configuration list for PBXNativeTarget "DepthCamera" */;
+			buildConfigurationList = E916CAA929B020F2002A8545 /* Build configuration list for PBXNativeTarget "DTTD Capture" */;
 			buildPhases = (
 				E916CA9729B020F1002A8545 /* Sources */,
 				E916CA9829B020F1002A8545 /* Frameworks */,
@@ -122,9 +122,9 @@
 			);
 			dependencies = (
 			);
-			name = DepthCamera;
+			name = "DTTD Capture";
 			productName = DepthCamera;
-			productReference = E916CA9B29B020F1002A8545 /* DepthCamera.app */;
+			productReference = E916CA9B29B020F1002A8545 /* DTTD Capture.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -142,7 +142,7 @@
 					};
 				};
 			};
-			buildConfigurationList = E916CA9629B020F1002A8545 /* Build configuration list for PBXProject "DepthCamera" */;
+			buildConfigurationList = E916CA9629B020F1002A8545 /* Build configuration list for PBXProject "DTTD Capture" */;
 			compatibilityVersion = "Xcode 14.0";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -155,7 +155,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				E916CA9A29B020F1002A8545 /* DepthCamera */,
+				E916CA9A29B020F1002A8545 /* DTTD Capture */,
 			);
 		};
 /* End PBXProject section */
@@ -376,7 +376,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		E916CA9629B020F1002A8545 /* Build configuration list for PBXProject "DepthCamera" */ = {
+		E916CA9629B020F1002A8545 /* Build configuration list for PBXProject "DTTD Capture" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				E916CAA729B020F2002A8545 /* Debug */,
@@ -385,7 +385,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		E916CAA929B020F2002A8545 /* Build configuration list for PBXNativeTarget "DepthCamera" */ = {
+		E916CAA929B020F2002A8545 /* Build configuration list for PBXNativeTarget "DTTD Capture" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				E916CAAA29B020F2002A8545 /* Debug */,
