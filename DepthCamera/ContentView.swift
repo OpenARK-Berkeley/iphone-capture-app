@@ -25,8 +25,8 @@ struct ContentView: View {
                 HStack {
                     Text("Depth Confidence")
                     Picker("Depth Confidence", selection: $globals.depthConfidence) {
-                        Text("Low").tag(ARConfidenceLevel.low)
-                        Text("Medium").tag(ARConfidenceLevel.medium)
+                        Text("Keep all depth").tag(ARConfidenceLevel.low)
+                        Text("Medium or above").tag(ARConfidenceLevel.medium)
                         Text("High").tag(ARConfidenceLevel.high)
                     }
                 }
@@ -99,7 +99,7 @@ struct ContentView: View {
             return AnyView(Button {
                     globals.captureState.next()
                 } label: {
-                    Text("Start to Capture").padding()
+                    Text("Start to Calibrate").padding()
                 }
                 .buttonStyle(.borderedProminent).tint(.green))
             
@@ -107,7 +107,7 @@ struct ContentView: View {
             return AnyView(Button {
                     globals.captureState.next()
                 } label: {
-                    Text("Stop Capturing").padding()
+                    Text("Stop Calibrating").padding()
                 }
                 .buttonStyle(.borderedProminent).tint(.gray))
             
@@ -130,23 +130,6 @@ struct ContentView: View {
                     Text("Stop Capturing").padding()
                 }
                 .buttonStyle(.borderedProminent).tint(.gray))
-        }
-    }
-    
-    func getCaptureButtonText() -> Text {
-        if globals.captureState == .arSessionNotReady {
-            return Text("Unavailable")
-        }
-        
-        if globals.captureState == .availableForCapture {
-            return Text("Prepare for Capture")
-        }
-        
-        if globals.captureState == .calibrating
-            || globals.captureState == .collectingData {
-            return Text("Stop Capturing")
-        } else {
-            return Text("Start to Capture")
         }
     }
     

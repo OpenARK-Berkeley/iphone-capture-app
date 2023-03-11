@@ -100,9 +100,9 @@ extension CaptureDisplayViewCoordinator: ARSessionDelegate {
         
         // Write the capture if calibrating or collecting data.
         if globals.captureState == .calibrating || globals.captureState == .collectingData {
-            latestFrameID += 1
             writer.saveTimestamp(frame.timestamp)
             writer.write(frameID: latestFrameID, rgbPixelBuffer: videoPixelBuffer, depthPixelBuffer: depthPixelBuffer, depthConfidencePixelBuffer: depthConfidencePixelBuffer, cameraIntrinsic: cameraIntrinsics)
+            latestFrameID += 1
         }
     }
     
