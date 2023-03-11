@@ -16,6 +16,8 @@ class GlobalVariables: ObservableObject {
     @Published var useDepthConfidence: Bool = true
     @Published var depthConfidence: ARConfidenceLevel = .low
     
+    var captureFrameRate: Int = 30
+    
     lazy var device: MTLDevice! = MTLCreateSystemDefaultDevice()
     lazy var commandQueue: MTLCommandQueue! = device.makeCommandQueue()
     lazy var library: MTLLibrary! = device.makeDefaultLibrary()

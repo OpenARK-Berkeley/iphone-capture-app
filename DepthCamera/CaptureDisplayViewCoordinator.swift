@@ -24,6 +24,9 @@ class CaptureDisplayViewCoordinator: NSObject {
     var latestFrameID = 0
     var firstDataCaptureFrameID = 0
     
+    lazy var expectedCaptureFrameDuration: Double = 1 / Double(globals.captureFrameRate)
+    var lastCaptureFrameAbsoluteTime = CFAbsoluteTimeGetCurrent()
+    
     init(view: CaptureDisplayUIView? = nil) {
         super.init()
         self.view = view
@@ -88,6 +91,12 @@ extension CaptureDisplayViewCoordinator: ARSessionDelegate {
             globals.renderer.textures[.depth] = createMTLTexture(from: depthPixelBuffer, textureCache: textureCache, pixelFormat: .r32Float)
             globals.renderer.textures[.depthConfidence] = createMTLTexture(from: depthConfidencePixelBuffer, textureCache: textureCache, pixelFormat: .r8Uint)
         }
+        
+        // Cap frame rate to be globals.captureFrameRate.
+        // Note that we don't cap rendering frame rate, we only cap capture frame rate.
+        let deltaTime = CFAbsoluteTimeGetCurrent() - lastCaptureFrameAbsoluteTime
+        if deltaTime < expectedCaptureFrameDuration { return }
+        lastCaptureFrameAbsoluteTime = CFAbsoluteTimeGetCurrent()
         
         // Write the capture if calibrating or collecting data.
         if globals.captureState == .calibrating || globals.captureState == .collectingData {

@@ -35,7 +35,6 @@ class CaptureDisplayUIView: MTKView {
         
         self.coordinator = coordinator
         self.session = ARSession()
-        self.preferredFramesPerSecond = 60
         
         initMTKView()
         initSession()
