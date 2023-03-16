@@ -57,6 +57,7 @@ class CaptureDisplayUIView: MTKView {
         
         // Pass in config params.
         config.frameSemantics = [.sceneDepth]
+        config.isAutoFocusEnabled = false
         
         session.delegate = coordinator
         session.run(config)
